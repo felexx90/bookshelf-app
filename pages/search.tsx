@@ -20,6 +20,9 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  Container,
+  Flex,
+  Box,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import Layout from "@/components/Layout";
@@ -120,13 +123,15 @@ const Search = ({ initialBooks, initialList }) => {
     <Layout user={user} loading={isLoading}>
       <Heading>Search</Heading>
       <VStack>
-        <HStack spacing={4} align="stretch">
-          <Input
-            w={"50rem"}
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search by name or author"
-          />
+        <HStack width="100%" maxW="container.lg" spacing={4}>
+          <Box w="100%">
+            <Input
+              maxW="container.lg"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search by name or author"
+            />
+          </Box>
           <Menu>
             <MenuButton
               as={Button}
@@ -144,7 +149,7 @@ const Search = ({ initialBooks, initialList }) => {
             </MenuList>
           </Menu>
         </HStack>
-        <SimpleGrid spacing={4} minChildWidth="500px">
+        <SimpleGrid spacing={4} columns={{ base: 1, md: 2, lg: 3 }}>
           {books.map((book) => (
             <Book
               key={book.id}
