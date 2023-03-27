@@ -156,7 +156,7 @@ const Search = ({ initialBooks, initialList }) => {
               book={book}
               user={user}
               onAddBook={setList}
-              isOnList={!!list?.map[book.id]}
+              isOnList={list?.map ? !!list?.map[book.id]: false}
             />
           ))}
         </SimpleGrid>
@@ -183,7 +183,9 @@ export async function getServerSideProps({ req, res }) {
     return {
       props: {
         initialBooks,
-        initialList: recurisveObjectIdStringifyer(initialList.toJSON()),
+        initialList: initialList
+          ? recurisveObjectIdStringifyer(initialList.toJSON())
+          : { map: {} },
       }, // will be passed to the page component as props
     };
   }
